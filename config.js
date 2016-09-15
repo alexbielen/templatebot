@@ -4,6 +4,7 @@
 
 
 var settings = {
+    botname: 'nameofbot',
     triggerWords: ['add', 'trigger', 'words or phrases', 'here'],
     responses: ['add', 'responses', 'or phrases', 'here']
 };
