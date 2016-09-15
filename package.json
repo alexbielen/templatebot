@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/alexbielen/templatebot/issues"
   },
-  "homepage": "https://github.com/alexbielen/templatebot#readme"
+  "homepage": "https://github.com/alexbielen/templatebot#readme",
+  "dependencies": {
+    "slackbots": "^0.5.2"
+  }
 }
