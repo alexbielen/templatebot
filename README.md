@@ -1,0 +1,2 @@
+# templatebot
+A Slackbot Template. 
