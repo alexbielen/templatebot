@@ -38,26 +38,35 @@
     };
 
     // API
-    var getBot = (settings) => new Slackbot(settings);
-
-    var run = function (bot, settings) {
-        config = settings;
-
-        // we need to get some info once connected to the channel
-        bot.on('start', () => {
-            botUser = bot.users.filter(user => user.name === config.botname)[0]
+    var getBot = function (token, settings) {
+        bot = new Slackbot({
+            'token': token,
+            'name': settings.botName
         });
 
-        bot.on('message', message => {
-            if (isChatMessage(message) && isChannelConvo(message) && !isFromBot(message, botUser) && mentionsTrigger(message)) {
-                var channel = getChannelById(message.channel, bot);
-                bot.postMessageToChannel(channel.name, getRandomResponse(), {as_user: true});
-            }
-        })
+        var run = function () {
+            config = settings;
+
+            // we need to get some info once connected to the channel
+            bot.on('start', () => {
+                botUser = bot.users.filter(user => user.name === config.botname)[0]
+            });
+
+            bot.on('message', message => {
+                if (isChatMessage(message) && isChannelConvo(message) && !isFromBot(message, botUser) && mentionsTrigger(message)) {
+                    var channel = getChannelById(message.channel, bot);
+                    bot.postMessageToChannel(channel.name, getRandomResponse(), {as_user: true});
+                }
+            })
+        };
+
+        return {
+            'run': run
+        };
     };
 
+
     module.exports = {
-        'run': run,
         'getBot': getBot
     }
 })();
