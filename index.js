@@ -4,8 +4,6 @@
 (function () {
 
     var Slackbot = require('slackbots');
-    var config,
-        botUser;
 
     // utility functions
     var isChatMessage = function (message) {
@@ -21,52 +19,46 @@
         return message.user === botUser.id;
     };
 
-    var mentionsTrigger = function (message) {
+    var mentionsTrigger = function (message, settings) {
         // check the message against the trigger words
-        return config.triggerWords.some(function (word) {
+        return settings.triggerWords.some(function (word) {
             return message.text.toLowerCase().indexOf(word) > -1;
         });
-
     };
 
     var getChannelById = function (channelId, outerBot) {
         return outerBot.channels.filter(item => item.id === channelId)[0];
     };
 
-    var getRandomResponse = function () {
-        return config.responses[Math.floor(Math.random() * config.responses.length)];
+    var getRandomResponse = function (settings) {
+        return settings.responses[Math.floor(Math.random() * settings.responses.length)];
     };
 
     // API
-    var getBot = function (token, settings) {
-        bot = new Slackbot({
+    var startBot = function (token, settings) {
+        const bot = new Slackbot({
             'token': token,
             'name': settings.botName
         });
+        const botUser = bot.on('start', () =>
+            bot.users.filter(user => user.name === settings.botName)[0]
+        );
 
         var run = function () {
-            config = settings;
-
-            // we need to get some info once connected to the channel
-            bot.on('start', () => {
-                botUser = bot.users.filter(user => user.name === config.botname)[0]
-            });
-
             bot.on('message', message => {
-                if (isChatMessage(message) && isChannelConvo(message) && !isFromBot(message, botUser) && mentionsTrigger(message)) {
+                if (isChatMessage(message) && isChannelConvo(message) && !isFromBot(message, botUser) && mentionsTrigger(message, settings)) {
                     var channel = getChannelById(message.channel, bot);
-                    bot.postMessageToChannel(channel.name, getRandomResponse(), {as_user: true});
+                    bot.postMessageToChannel(channel.name, getRandomResponse(settings), {as_user: true});
                 }
             })
         };
 
         return {
             'run': run
-        };
+        }
     };
 
-
     module.exports = {
-        'getBot': getBot
+        'startBot': startBot
     }
 })();
