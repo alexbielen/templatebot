@@ -1,8 +1,11 @@
 # templatebot
+
+[![npm version](https://badge.fury.io/js/templatebot.svg)](https://badge.fury.io/js/templatebot)
+
 Make simple SlackBots with an even simpler settings object!
 
 ```javascript
-import { startBot } from 'templatebot';
+import { makeBot } from 'templatebot';
 
 var settings = {
     botName: 'newbot',
@@ -10,6 +13,6 @@ var settings = {
     responses: ['add', 'responses', 'or phrases', 'here']
 };
 
-var bot = startBot(process.env.SLACKBOT_TOKEN, settings);
+var bot = makeBot(process.env.SLACKBOT_TOKEN, settings);
 bot.run();
 ```

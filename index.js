@@ -35,7 +35,7 @@
     };
 
     // API
-    var startBot = function (token, settings) {
+    var getBot = function (token, settings) {
         const bot = new Slackbot({
             'token': token,
             'name': settings.botName
@@ -59,6 +59,6 @@
     };
 
     module.exports = {
-        'startBot': startBot
+        'getBot': getBot
     }
 })();
