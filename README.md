@@ -1,14 +1,15 @@
 # templatebot
-A Slackbot Template. 
-
-Simply add botname, trigger words and responses to the config file. 
+Make simple SlackBots with an even simpler settings object!
 
 ```javascript
-// config.js
+import { startBot } from 'templatebot';
+
 var settings = {
-    triggerWords: ['add', 'trigger', 'words or phrases', 'here'],
+    botName: 'alextest',
+    triggerWords: ['these', 'words', 'or', 'phrases', 'will trigger responses'],
     responses: ['add', 'responses', 'or phrases', 'here']
 };
-```
 
-and then add the bot token as an environment variable named `SLACKBOT_TOKEN`. 
+var bot = startBot(process.env.SLACKBOT_TOKEN, settings);
+bot.run();
+```
