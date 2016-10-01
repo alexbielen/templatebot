@@ -5,7 +5,7 @@ Make simple SlackBots with an even simpler settings object!
 import { startBot } from 'templatebot';
 
 var settings = {
-    botName: 'alextest',
+    botName: 'newbot',
     triggerWords: ['these', 'words', 'or', 'phrases', 'will trigger responses'],
     responses: ['add', 'responses', 'or phrases', 'here']
 };
