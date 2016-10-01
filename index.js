@@ -4,11 +4,7 @@
 (function () {
 
     var Slackbot = require('slackbots');
-    var config;
-
-    var settings = {
-            token: process.env.SLACKBOT_TOKEN
-        },
+    var config,
         botUser;
 
     // utility functions
@@ -41,9 +37,10 @@
         return config.responses[Math.floor(Math.random() * config.responses.length)];
     };
 
-    // instantiate bot
-    var bot = new Slackbot(settings);
-    var run = function (settings) {
+    // API
+    var getBot = (settings) => new Slackbot(settings);
+
+    var run = function (bot, settings) {
         config = settings;
 
         // we need to get some info once connected to the channel
@@ -59,17 +56,8 @@
         })
     };
 
-    var __private = {
-        'getRandomResponse': getRandomResponse,
-        'mentionsTrigger': mentionsTrigger,
-        'isFromBot': isFromBot,
-        'isChannelConvo': isChannelConvo,
-        'isChatMessage': isChatMessage
-    };
-
-
     module.exports = {
         'run': run,
-        '__private': __private
+        'getBot': getBot
     }
 })();
