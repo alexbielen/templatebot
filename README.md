@@ -5,7 +5,7 @@
 Make simple SlackBots with an even simpler settings object!
 
 ```javascript
-import { makeBot } from 'templatebot';
+import { getBot } from 'templatebot';
 
 var settings = {
     botName: 'newbot',
@@ -13,6 +13,6 @@ var settings = {
     responses: ['add', 'responses', 'or phrases', 'here']
 };
 
-var bot = makeBot(process.env.SLACKBOT_TOKEN, settings);
+var bot = getBot(process.env.SLACKBOT_TOKEN, settings);
 bot.run();
 ```
