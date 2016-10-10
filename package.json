@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/alexbielen/templatebot#readme",
   "dependencies": {
-    "slackbots": "^0.5.2"
+    "slackbots": "^0.5.3"
   }
 }
