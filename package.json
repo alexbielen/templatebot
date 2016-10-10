@@ -1,6 +1,6 @@
 {
   "name": "templatebot",
-  "version": "0.0.3",
+  "version": "0.0.2",
   "description": "A template for making Slackbots",
   "main": "index.js",
   "scripts": {
