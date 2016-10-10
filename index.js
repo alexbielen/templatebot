@@ -35,7 +35,7 @@ const getUserById = (bot, userId) =>
 
 const isUserInPreemptives = (bot, message, preemptives) => {
     const user = getUserById(bot, message.user);
-    return preemptives.includes(user.name);
+    return preemptives.indexOf(user.name) > -1;
 };
 
 
