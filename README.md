@@ -13,6 +13,7 @@ var settings = {
     responses: ['add', 'responses', 'or phrases', 'here'],
     preemptiveStrike: {
         'someuser': ['these', 'responses will be chosen', 'as soon as this user', 'starts typing']
+    }
 };
 
 var bot = getBot(process.env.SLACKBOT_TOKEN, settings);
