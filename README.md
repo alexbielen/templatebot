@@ -1,6 +1,7 @@
 # templatebot
 
 [![npm version](https://badge.fury.io/js/templatebot.svg)](https://badge.fury.io/js/templatebot)
+[![dependency badge](https://david-dm.org/alexbielen/templatebot.svg)](https://david-dm.org/alexbielen/templatebot)
 
 Make simple SlackBots with an even simpler settings object!
 
