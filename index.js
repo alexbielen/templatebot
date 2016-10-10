@@ -27,20 +27,19 @@ const getRandomResponse = responses =>
 
 
 // Preemptive Strike Functions
-
 const isSomeoneTyping = message =>
     message.type === 'user_typing';
 
 const getUserById = (bot, userId) =>
     bot.users.filter(user => user.id === userId)[0];
 
-
 const isUserInPreemptives = (bot, message, preemptives) => {
     const user = getUserById(bot, message.user);
-    return user.name in preemptives;
+    return preemptives.includes(user.name);
 };
 
-// API
+
+// Public API
 const getBot = function (token, settings) {
 
     const bot = new Slackbot({
@@ -56,25 +55,20 @@ const getBot = function (token, settings) {
 
     const run = function () {
         bot.on('message', message => {
-            console.log(message);
 
             // Call and Response
             if (isChatMessage(message) && isChannelConvo(message) && !isFromBot(message, botUser) && mentionsTrigger(message, settings)) {
-                var channel = getChannelById(message.channel, bot);
                 bot.postMessageToChannel(channel.name, getRandomResponse(settings.responses), {as_user: true});
             }
 
             // Preemptive Strike
             if (isSomeoneTyping(message) && isUserInPreemptives(bot, message, preemptiveStrikeUsers)) {
                 var channel = getChannelById(message.channel, bot);
-                bot.postMessageToChannel(channel.name, getRandomResponse(settings), {as_user: true})
+                var user = getUserById(bot, message.user);
+                bot.postMessageToChannel(channel.name, getRandomResponse(settings.preemptiveStrike[user.name]), {as_user: true})
             }
 
-
-
-
-
-        })
+        });
     };
 
     return {
