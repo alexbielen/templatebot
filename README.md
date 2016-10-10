@@ -10,7 +10,9 @@ import { getBot } from 'templatebot';
 var settings = {
     botName: 'newbot',
     triggerWords: ['these', 'words', 'or', 'phrases', 'will trigger responses'],
-    responses: ['add', 'responses', 'or phrases', 'here']
+    responses: ['add', 'responses', 'or phrases', 'here'],
+    preemptiveStrike: {
+        'someuser': ['these', 'responses will be chosen', 'as soon as this user', 'starts typing']
 };
 
 var bot = getBot(process.env.SLACKBOT_TOKEN, settings);
